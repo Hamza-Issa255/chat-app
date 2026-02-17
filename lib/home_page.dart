@@ -11,8 +11,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Friends"),
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.red,
         actions: [
           IconButton(
             onPressed: () => FirebaseAuth.instance.signOut(),
