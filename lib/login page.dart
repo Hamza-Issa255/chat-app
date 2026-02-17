@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text("you dont have Account? "),
+                    const Text("huna account? "),
                     GestureDetector(
                       onTap: () {
                         // Hapa tutaweka logic ya kubadili kwenda Register
@@ -100,10 +100,10 @@ class _LoginPageState extends State<LoginPage> {
       controller: controller,
       obscureText: obscure,
       decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: Colors.blue),
+        prefixIcon: Icon(icon, color: Colors.white),
         enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.white), borderRadius: BorderRadius.circular(12)),
         focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.blue), borderRadius: BorderRadius.circular(12)),
-        fillColor: Colors.white,
+        fillColor: Colors.blue,
         filled: true,
         hintText: hintText,
       ),
