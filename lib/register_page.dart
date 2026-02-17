@@ -19,22 +19,34 @@ class _RegisterPageState extends State<RegisterPage> {
   Future signUp() async {
     try {
       // 1. Tengeneza akaunti ya login
-      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim(),
-      );
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+            email: _emailController.text.trim(),
+            password: _passwordController.text.trim(),
+          );
 
       // 2. Save taarifa za mtumiaji kwenye Firestore Database
-      await FirebaseFirestore.instance.collection('Users').doc(userCredential.user!.uid).set({
-        'uid': userCredential.user!.uid,
-        'name': _nameController.text.trim(),
-        'email': _emailController.text.trim(),
-        'isOnline': true,
-      });
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userCredential.user!.uid)
+          .set({
+            'uid': userCredential.user!.uid,
+            'name': _nameController.text.trim(),
+            'email': _emailController.text.trim(),
+            'isOnline': true,
+          });
 
       //Toa mtumiaji nje
       await FirebaseAuth.instance.signOut();
 
+      //kumpeleka login page
+
+      if (mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Account created! You can login.")),
+        );
+      }
     } catch (e) {
       print(e.toString());
     }
@@ -53,9 +65,15 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 const Icon(Icons.message_rounded, size: 80, color: Colors.blue),
                 const SizedBox(height: 25),
-                const Text("Create your Account", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                const Text(
+                  "Create your Account",
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(height: 10),
-                const Text("stark to chat with your friend", style: TextStyle(fontSize: 16, color: Colors.grey)),
+                const Text(
+                  "stark to chat with your friend",
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
                 const SizedBox(height: 30),
 
                 // Name Input
@@ -80,7 +98,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Center(
-                      child: Text("Register", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+                      child: Text(
+                        "Register",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -90,12 +115,19 @@ class _RegisterPageState extends State<RegisterPage> {
                   children: [
                     const Text("You have account? "),
                     GestureDetector(
-                      onTap: () => Navigator.pop(context), // Inamrudisha nyuma kwenye Login
-                      child: const Text("Login", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                      onTap: () => Navigator.pop(
+                        context,
+                      ), // Inamrudisha nyuma kwenye Login
+                      child: const Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
-                )
-
+                ),
               ],
             ),
           ),
@@ -105,14 +137,25 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   // Widget ya kurahisisha utengenezaji wa TextFields
-  Widget _myTextField(TextEditingController controller, String hintText, bool obscure, IconData icon) {
+  Widget _myTextField(
+    TextEditingController controller,
+    String hintText,
+    bool obscure,
+    IconData icon,
+  ) {
     return TextField(
       controller: controller,
       obscureText: obscure,
       decoration: InputDecoration(
         prefixIcon: Icon(icon, color: Colors.blue),
-        enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.white), borderRadius: BorderRadius.circular(12)),
-        focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Colors.blue), borderRadius: BorderRadius.circular(12)),
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.white),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.blue),
+          borderRadius: BorderRadius.circular(12),
+        ),
         fillColor: Colors.white,
         filled: true,
         hintText: hintText,
