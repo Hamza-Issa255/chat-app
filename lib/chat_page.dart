@@ -203,7 +203,7 @@ class _ChatPageState extends State<ChatPage> {
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
       elevation: 0.5,
-      shadowColor: Colors.black12,
+      shadowColor: Colors.red,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () => Navigator.pop(context),
