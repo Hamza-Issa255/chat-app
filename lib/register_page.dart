@@ -35,8 +35,16 @@ class _RegisterPageState extends State<RegisterPage> {
       //Toa mtumiaji nje
       await FirebaseAuth.instance.signOut();
 
+      //kumpeleka login page
+
+      if (mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Account created! You can login.")),
+        );
+      }
     } catch (e) {
-      print(e.toString());
+     print(e.toString());
     }
   }
 

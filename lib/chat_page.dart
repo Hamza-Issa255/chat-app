@@ -33,17 +33,13 @@ class _ChatPageState extends State<ChatPage> {
     if (_messageController.text.isNotEmpty) {
       String chatRoomId = getChatRoomId();
 
-      await _firestore
-          .collection('chat_rooms')
-          .doc(chatRoomId)
-          .collection('messages')
-          .add({
-            'senderId': _auth.currentUser!.uid,
-            'receiverId': widget.receiverUserID,
-            'message': _messageController.text,
-            'timestamp': Timestamp.now(),
-            'isRead': false, // Tiki moja (Sent)
-          });
+      await _firestore.collection('chat_rooms').doc(chatRoomId).collection('messages').add({
+        'senderId': _auth.currentUser!.uid,
+        'receiverId': widget.receiverUserID,
+        'message': _messageController.text,
+        'timestamp': Timestamp.now(),
+        'isRead': false, // Tiki moja (Sent)
+      });
 
       _messageController.clear();
     }
@@ -71,18 +67,13 @@ class _ChatPageState extends State<ChatPage> {
     markAsRead();
 
     return Scaffold(
-      backgroundColor: const Color(
-        0xFFECE5DD,
-      ), // Rangi ya background ya WhatsApp
+      backgroundColor: const Color(0xFFECE5DD), // Rangi ya background ya WhatsApp
       appBar: AppBar(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(widget.receiverUserName, style: const TextStyle(fontSize: 18)),
-            const Text(
-              "Online",
-              style: TextStyle(fontSize: 12, color: Colors.white70),
-            ),
+            const Text("Online", style: TextStyle(fontSize: 12, color: Colors.white70)),
           ],
         ),
         backgroundColor: const Color(0xFF075E54),
@@ -100,8 +91,7 @@ class _ChatPageState extends State<ChatPage> {
                   .orderBy('timestamp', descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData)
-                  return const Center(child: CircularProgressIndicator());
+                if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
 
                 // Tunapopata meseji mpya tukiwa ndani ya chat
                 markAsRead();
@@ -132,16 +122,12 @@ class _ChatPageState extends State<ChatPage> {
     return Container(
       alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
       child: Column(
-        crossAxisAlignment: isMe
-            ? CrossAxisAlignment.end
-            : CrossAxisAlignment.start,
+        crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-            constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.7,
-            ),
+            constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.7),
             decoration: BoxDecoration(
               color: isMe ? const Color(0xFFDCF8C6) : Colors.white,
               borderRadius: BorderRadius.only(
@@ -151,11 +137,7 @@ class _ChatPageState extends State<ChatPage> {
                 bottomRight: Radius.circular(isMe ? 0 : 12),
               ),
               boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
-                  blurRadius: 1,
-                  spreadRadius: 1,
-                ),
+                BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 1, spreadRadius: 1)
               ],
             ),
             child: Column(
