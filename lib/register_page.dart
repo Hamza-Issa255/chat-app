@@ -10,7 +10,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -24,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
             email: _emailController.text.trim(),
             password: _passwordController.text.trim(),
           );
+
 
       // 2. Save taarifa za mtumiaji kwenye Firestore Database
       await FirebaseFirestore.instance
