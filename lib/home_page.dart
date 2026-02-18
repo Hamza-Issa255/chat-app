@@ -20,6 +20,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+
       body: StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('Users').snapshots(),
         builder: (context, snapshot) {
@@ -37,6 +38,7 @@ class HomePage extends StatelessWidget {
                   leading: Stack(
                     children: [
                       const CircleAvatar(child: Icon(Icons.person)),
+
                       // DOTI YA KIJANI (Online Status)
                       if (data['isOnline'] == true)
                         Positioned(
@@ -54,6 +56,7 @@ class HomePage extends StatelessWidget {
                         ),
                     ],
                   ),
+                  
                   title: Text(data['name'] ?? data['email']),
                   onTap: () {
                     Navigator.push(
