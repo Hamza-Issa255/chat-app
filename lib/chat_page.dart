@@ -542,10 +542,11 @@ class _ChatPageState extends State<ChatPage> {
               child: IconButton(
                 icon: const Icon(Icons.attach_file, color: Color(0xFF2A6B9C), size: 22),
                 onPressed: () {
-                  // Implement attachment if needed
+                  // Implement atachment if you need
                 },
               ),
             ),
+            
             // Text field
             Expanded(
               child: Container(
