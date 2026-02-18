@@ -125,8 +125,8 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  Widget _buildMessageItem(DocumentSnapshot doc) {
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+  cWidget _buildMessageItem(DocumentSnapshot doc) {
+    Map<String, dynamic> data = do.data() as Map<String, dynamic>;
     bool isMe = data['senderId'] == _auth.currentUser!.uid;
 
     return Container(
