@@ -41,7 +41,7 @@ class _ChatPageState extends State<ChatPage> {
         .snapshots()
         .listen((snapshot) {
       for (var doc in snapshot.docs) {
-        doc.reference.update({'status': 'delivered'});
+        doc.reference.update({'status': 'read'});
       }
     });
   }
@@ -174,8 +174,7 @@ class _ChatPageState extends State<ChatPage> {
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
-                    // Mark messages as read whenever the stream rebuilds
-                    markAsRead();
+                    // Mark messages as read whenever the stream rebuild
                     return ListView.builder(
                       reverse: true,
                       padding: const EdgeInsets.all(10),
