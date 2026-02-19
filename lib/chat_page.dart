@@ -265,6 +265,7 @@ class _ChatPageState extends State<ChatPage> {
               ),
               child: TextField(
                 controller: _messageController,
+                style: const TextStyle(color: Colors.black87),.
                 decoration: const InputDecoration(
                   hintText: "Your text...",
                   border: InputBorder.none,
