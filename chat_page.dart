@@ -193,8 +193,8 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  cWidget _buildMessageItem(DocumentSnapshot doc) {
-    Map<String, dynamic> data = do.data() as Map<String, dynamic>;
+  Widget _buildMessageItem(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     bool isMe = data['senderId'] == _auth.currentUser!.uid;
     var time = DateFormat('hh:mm a').format((data['timestamp'] as Timestamp).toDate());
     return Container(
